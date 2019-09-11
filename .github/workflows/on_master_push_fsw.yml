@@ -14,12 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - name: checkout
     - uses: actions/checkout@master
     - uses: actions/setup-node@master
       with:
         node-version: 10.x 
-    - run: |
+    - name: checkout
+      run: |
         npm install
         npm test
     - name: list
