@@ -1,4 +1,5 @@
 /************************************************************************
+** THIS SHOULDN"T TRIGGER ACTION
 **
 **      GSC-18128-1, "Core Flight Executive Version 6.6"
 **
