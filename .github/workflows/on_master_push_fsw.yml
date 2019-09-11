@@ -1,0 +1,22 @@
+name: On master push fsw
+
+on:
+  push:
+    branches:
+    - test_action
+    paths:
+    - 'fsw/src/*'
+    - '!fsw/src/*_version.h'
+
+jobs:
+  version_update:
+
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: report status
+      run: git status
+    - name: report branch
+      run: git branch
+#    - name: run script
+#      run: .github/workflow/update_version.sh
