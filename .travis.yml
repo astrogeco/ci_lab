@@ -33,6 +33,7 @@ jobs:
 
     - stage: prepare cache
       script:
+        - cd $HOME
         # Get bundle (doesn't populate submodules, not needed for style enforcement)
         - git clone https://github.com/nasa/cFS.git
         - cd ./cFS
@@ -43,7 +44,7 @@ jobs:
     - stage: style check
     # Enforce formatting
       script:
-        - cp -r ci_lab cFS/apps
+        - cp -r $TRAVIS_BUILD_DIR/ci_lab cFS/apps
         - cd cFS/apps/ci_lab
         - find . -name "*.[ch]" -exec clang-format-10 -i -style=file {} +
         - git diff > style_differences.txt
@@ -57,10 +58,10 @@ jobs:
 
     - stage: integration test
       script:
-        - cd cFS
+        - cd $HOME/cFS
         - git submodule update
         - cd ..
-        - cp -r ci_lab cFS/apps/
+        - cp -r $TRAVIS_BUILD_DIR/ci_lab cFS/apps/
 
 
 
