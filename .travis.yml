@@ -27,16 +27,18 @@ before_script:
   - cppcheck --version
   - clang-format-10 --version
   - cd ..
+
+script:
   # Get bundle (doesn't populate submodules, not needed for style enforcement)
   - git clone https://github.com/nasa/cFS.git
-  - cp -r ci_lab cFS/apps
-
 
 jobs:
   include:
-    # Enforce formatting
+
     - stage: style check
+    # Enforce formatting    
       script:
+        - cp -r ci_lab cFS/apps
         - cd cFS/apps/ci_lab
         - find . -name "*.[ch]" -exec clang-format-10 -i -style=file {} +
         - git diff > style_differences.txt
@@ -52,9 +54,10 @@ jobs:
       script:
         - cd cFS
         - git submodule init
-        - git submodule deinit ci_lab
+        - git submodule deinit apps/ci_lab/
+        - git submodule update
         - cd ..
-        - cp -r ci_lab cFS/apps
+        - cp -r ci_lab cFS/apps/
 
 
 
