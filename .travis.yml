@@ -31,12 +31,14 @@ before_script:
 script:
   # Get bundle (doesn't populate submodules, not needed for style enforcement)
   - git clone https://github.com/nasa/cFS.git
+  - git submodule init
+  - git submodule deinit apps/ci_lab/
 
 jobs:
   include:
 
     - stage: style check
-    # Enforce formatting    
+    # Enforce formatting
       script:
         - cp -r ci_lab cFS/apps
         - cd cFS/apps/ci_lab
@@ -53,8 +55,6 @@ jobs:
     - stage: integration test
       script:
         - cd cFS
-        - git submodule init
-        - git submodule deinit apps/ci_lab/
         - git submodule update
         - cd ..
         - cp -r ci_lab cFS/apps/
