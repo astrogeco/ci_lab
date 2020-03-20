@@ -9,6 +9,11 @@ addons:
       - ubuntu-toolchain-r-test
     packages:
       - cmake
+      - ccache
+
+cache:
+  - $HOME/.ccache
+  - $HOME/cFS
 
 before_install:
   # for clang-format 10
