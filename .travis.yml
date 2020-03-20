@@ -15,15 +15,12 @@ before_install:
   - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
   - sudo add-apt-repository 'deb http://apt.llvm.org/bionic/   llvm-toolchain-bionic-10 main'
   - sudo apt-get update
-
-install:
   - sudo apt-get install cppcheck
   - sudo apt-get install clang-format-10
 
 before_script:
   - cppcheck --version
   - clang-format-10 --version
-  - pwd
   - cd ..
   # Get bundle (doesn't populate submodules, not needed for style enforcement)
   - git clone https://github.com/nasa/cFS.git
@@ -50,6 +47,7 @@ jobs:
       script:
         - cd cFS
         - git submodule init
+        - git submodule deinit ci_lab
         - cd ..
         - cp -r ci_lab cFS/apps
 
