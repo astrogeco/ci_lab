@@ -11,23 +11,24 @@ addons:
       - cmake
 
 before_install:
-  - sudo apt-get install cppcheck
-  - cppcheck --version
   # for clang-format 10
   - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
   - sudo add-apt-repository 'deb http://apt.llvm.org/bionic/   llvm-toolchain-bionic-10 main'
   - sudo apt-get update
 
 install:
+  - sudo apt-get install cppcheck
   - sudo apt-get install clang-format-10
   - clang-format-10 --version
   - pwd
   - cd ..
   - git clone https://github.com/nasa/cFS.git
 
+before_script:
+  - cp -r ci_lab cFS/apps
+
 script:
 # Get bundle (doesn't populate submodules, not needed for style enforcement)
-  - mv ci_lab cFS/apps
   - cd cFS/apps/ci_lab
 #   # Enforce formatting
 #   - find . -name "*.[ch]" -exec clang-format-10 -i -style=file {} +
