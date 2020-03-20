@@ -44,7 +44,7 @@ jobs:
     - stage: style check
     # Enforce formatting
       script:
-        - cp -r $TRAVIS_BUILD_DIR/ci_lab cFS/apps
+        - cp -r $TRAVIS_BUILD_DIR cFS/apps
         - cd cFS/apps/ci_lab
         - find . -name "*.[ch]" -exec clang-format-10 -i -style=file {} +
         - git diff > style_differences.txt
@@ -61,7 +61,7 @@ jobs:
         - cd $HOME/cFS
         - git submodule update
         - cd ..
-        - cp -r $TRAVIS_BUILD_DIR/ci_lab cFS/apps/
+        - cp -r $TRAVIS_BUILD_DIR cFS/apps/
 
 
 
