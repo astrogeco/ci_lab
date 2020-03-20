@@ -21,6 +21,7 @@ install:
   - sudo apt-get install clang-format-10
 
 before_script:
+  - cppcheck --version
   - clang-format-10 --version
   - pwd
   - cd ..
@@ -44,7 +45,7 @@ jobs:
             cat style_differences.txt
             exit -1
             fi
-            
+
     - stage: integration test
       script:
         - cd cFS
