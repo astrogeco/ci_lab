@@ -29,7 +29,7 @@ before_script:
   - clang-format-10 --version
   - cd $HOME
   # Get bundle (doesn't populate submodules, not needed for style enforcement)
-  - git clone https://github.com/nasa/cFS.git
+  - git clone https://github.com/nasa/cFS.git || true
   - cd $HOME/cFS
   - pwd
   - git submodule init
