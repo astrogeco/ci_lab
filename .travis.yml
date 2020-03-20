@@ -17,8 +17,11 @@ before_install:
   - wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | sudo apt-key add -
   - sudo add-apt-repository 'deb http://apt.llvm.org/bionic/   llvm-toolchain-bionic-10 main'
   - sudo apt-get update
+
+install:
   - sudo apt-get install clang-format-10
   - clang-format-10 --version
+  - pwd
   - cd ..
   - git clone https://github.com/nasa/cFS.git
 
