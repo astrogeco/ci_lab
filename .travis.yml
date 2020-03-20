@@ -30,12 +30,13 @@ before_script:
   - cd $HOME
   # Get bundle (doesn't populate submodules, not needed for style enforcement)
   - git clone https://github.com/nasa/cFS.git
-
-script:
-  - cd ./cFS
+  - cd $HOME/cFS
   - pwd
   - git submodule init
   - git submodule deinit apps/ci_lab/
+
+script:
+  - cp -r $TRAVIS_BUILD_DIR cFS/apps
 
 jobs:
   include:
@@ -43,8 +44,7 @@ jobs:
     # Enforce formatting
       name: "Style Checks"
       script:
-        - cp -r $TRAVIS_BUILD_DIR cFS/apps
-        - cd cFS/apps/ci_lab
+        - cd $HOME/cFS/apps/ci_lab
         - find . -name "*.[ch]" -exec clang-format-10 -i -style=file {} +
         - git diff > style_differences.txt
         - |
